@@ -32,37 +32,38 @@ export default function Index() {
                 <Button className="m-5">Create</Button>
             </Link>
 
-            {products.length > 0 ? (
-                <ul>
-                    {products.map((product) => (
-                        <li key={product.id}>
-                            <div className='m-5'>
-                                <Table>
-                                <TableCaption>A list of your products.</TableCaption>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead className="w-[100px]">Product Id</TableHead>
-                                        <TableHead>Product Name</TableHead>
-                                        <TableHead>Product Price</TableHead>
-                                        <TableHead className="text-right">Product Description</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell className="font-medium">{product.id}</TableCell>
-                                        <TableCell>{product.name}</TableCell>
-                                        <TableCell>{product.price}</TableCell>
-                                        <TableCell className="text-right">{product.description}</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No products found.</p>
-            )}
+            <div className="m-5">
+                <Table>
+                    <TableCaption>A list of your products.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Product Id</TableHead>
+                            <TableHead>Product Name</TableHead>
+                            <TableHead>Product Price</TableHead>
+                            <TableHead>Product Description</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {products.length > 0 ? (
+                            products.map((product) => (
+                                <TableRow key={product.id}>
+                                    <TableCell>{product.id}</TableCell>
+                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell>{product.price}</TableCell>
+                                    <TableCell>{product.description}</TableCell>
+                                    <TableCell>
+                                        <Link href={route('products.edit', product.id)}>
+                                            <Button className="m-5">Edit</Button>
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        ) : (
+                            <p>No products found.</p>
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
         </AppLayout>
     );
 }
